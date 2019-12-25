@@ -1,11 +1,14 @@
 ﻿// Learn more about F# at http://fsharp.org
 
 open System
+open JsonModule
 open FSharp.Data
 open XPlot.GoogleCharts
 
 [<EntryPoint>]
 let main argv =
-    let data = WorldBankData.GetDataContext()
-    data.Countries.Denmark.Indicators.``Gross capital formation (% of GDP)`` |> Chart.Line |> Chart.Show
+    printArr
+    // let res = total
+    // printfn "%A" total
+
     0 // return an integer exit code
