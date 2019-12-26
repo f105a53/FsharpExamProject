@@ -24,8 +24,7 @@ let classAgeData =
 
 let classAmountData =
     passengers
-    |> Array.groupBy (fun p -> p.Fields.Pclass)
-    |> Array.map (fun (s, ps) -> s, ps |> Array.countBy (fun p -> p.Fields.Pclass))
+    |> Array.countBy (fun p -> p.Fields.Pclass)
 
 
 
