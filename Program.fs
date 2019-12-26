@@ -8,15 +8,19 @@ open Deedle
 
 [<EntryPoint>]
 let main argv =
-    let names = JsonModule.passengers
-                |> Array.map (fun passenger -> passenger.Fields.Name)
-    printfn "%A" names           
 
-    let avgAgeBySex =
-        passengers
-        |> Array.groupBy (fun p -> p.Fields.Sex)
-        |> Array.map (fun (s,ps) -> s,ps |> Array.averageBy (fun p -> p.Fields.Age |> Option.defaultValue 0m))
-    printfn "%A" avgAgeBySex
+    let res = classAmountData
+    printfn "%A" res
+    printfn "the end..." 
+    // let names = JsonModule.passengers
+    //             |> Array.map (fun passenger -> passenger.Fields.Name)
+    // printfn "%A" names           
+
+    // let avgAgeBySex =
+    //     passengers
+    //     |> Array.groupBy (fun p -> p.Fields.Sex)
+    //     |> Array.map (fun (s,ps) -> s,ps |> Array.averageBy (fun p -> p.Fields.Age |> Option.defaultValue 0m))
+    // printfn "%A" avgAgeBySex
 
     // let res = total
     // printfn "%A" total
