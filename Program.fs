@@ -6,7 +6,7 @@ open XPlot.GoogleCharts
 
 [<EntryPoint>]
 let main argv =
-    CSV.survivedByClass 
+    CSV.age 
     |> Chart.WithHeight 1000    
     |> Chart.Show
     0 // return an integer exit code

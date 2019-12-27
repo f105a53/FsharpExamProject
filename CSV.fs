@@ -39,3 +39,10 @@ let survivedByClass =
         let (clas,survived) = group
         string clas,(if survived then "Survived" else "Died"),data |> Seq.length)    
     |> Chart.Sankey
+
+//FIX: HTML error
+let age =
+    data.Rows
+    |> Seq.map (fun p -> p.Name,p.Age)
+    |> Chart.Histogram
+    |> Chart.WithLabel "Age"
