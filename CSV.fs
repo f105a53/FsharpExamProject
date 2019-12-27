@@ -46,3 +46,8 @@ let age =
     |> Seq.map (fun p -> p.Name,p.Age)
     |> Chart.Histogram
     |> Chart.WithLabel "Age"
+
+let ageToFare =
+    data.Rows
+    |> Seq.map (fun p -> p.Fare,p.Age)
+    |> Chart.Scatter
