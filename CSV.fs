@@ -30,3 +30,12 @@ let survivalByAgeClass =
     |> Seq.sortBy fst
     |> Seq.map (fun (age, data) -> data |> Seq.map (fun (t, avg) -> snd t, avg) |> Seq.sort)
     |> Chart.Line
+
+let survivedByClass =
+    data.Rows
+    |> Seq.groupBy (fun p ->
+    p.Pclass,p.Survived)
+    |> Seq.map (fun (group,data) ->
+        let (clas,survived) = group
+        string clas,(if survived then "Survived" else "Died"),data |> Seq.length)    
+    |> Chart.Sankey
