@@ -6,7 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="CSV.fs"/>
     <Compile Include="Program.fs" />
+    <None Include="data/**" CopyToOutputDirectory="PreserveNewest" />
+    
   </ItemGroup>
 
   <ItemGroup>

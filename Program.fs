@@ -6,6 +6,7 @@ open XPlot.GoogleCharts
 
 [<EntryPoint>]
 let main argv =
-    let data = WorldBankData.GetDataContext()
-    data.Countries.Denmark.Indicators.``Gross capital formation (% of GDP)`` |> Chart.Line |> Chart.Show
+    CSV.ageToFare
+    |> Chart.WithHeight 1000    
+    |> Chart.Show
     0 // return an integer exit code
