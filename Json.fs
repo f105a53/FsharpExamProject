@@ -5,11 +5,11 @@ open FSharp.Data
 open XPlot.GoogleCharts
 open System.Collections.Generic
 
-type TitanicPassengers = JsonProvider<"./files/titanic-passengers.json">
+type TitanicPassengers = JsonProvider<"./data/json/titanic-passengers.json">
 
-type CommodityPrices = JsonProvider<"./files/commodity-prices.json"> // http://pubdocs.worldbank.org/en/678281575404408706/CMO-Pink-Sheet-December-2019.pdf
+type CommodityPrices = JsonProvider<"./data/json/commodity-prices.json"> // http://pubdocs.worldbank.org/en/678281575404408706/CMO-Pink-Sheet-December-2019.pdf
 
-type MissileTests = JsonProvider<"./files/north-korea-missile-test.json">
+type MissileTests = JsonProvider<"./data/json/north-korea-missile-test.json">
 
 
 let missileSuccessRate (chartHeight: int) (chartWidth: int) =

@@ -1,15 +1,15 @@
 ﻿// Learn more about F# at http://fsharp.org
 
 open System
-open Json
+open XPlot.GoogleCharts
 
 [<EntryPoint>]
 let main argv =
 
-    showTitanicAmountChart 700 700
-    showTitanicAgeChart 700 700
-    missileSuccessRate 900 900
-    showCommodityValueLineChart (["Copper"; "Lead"; "Aluminum"; "Nickel"; "Tin"] |> Array.ofList) 900
+    Json.showTitanicAmountChart 700 700
+    Json.showTitanicAgeChart 700 700
+    Json.missileSuccessRate 900 900
+    Json.showCommodityValueLineChart (["Copper"; "Lead"; "Aluminum"; "Nickel"; "Tin"] |> Array.ofList) 900
 
     CSV.ageToFare
     |> Chart.WithHeight 1000    

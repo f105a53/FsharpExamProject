@@ -4,9 +4,9 @@ open FSharp.Data
 open Deedle
 open XPlot.GoogleCharts
 
-type TitanicData = CsvProvider<"data/titanic.csv">
+type TitanicData = CsvProvider<"data/csv/titanic.csv">
 
-let data = TitanicData.Load "data/titanic.csv"
+let data = TitanicData.Load "data/csv/titanic.csv"
 
 let count matching data =
     let all = data |> Seq.length
@@ -28,26 +28,29 @@ let survivalByAgeClass =
     |> Seq.map (fun (groups, data) -> groups, data |> count (fun p -> p.Survived))
     |> Seq.groupBy (fst >> fst)
     |> Seq.sortBy fst
-    |> Seq.map (fun (age, data) -> data |> Seq.map (fun (t, avg) -> snd t, avg) |> Seq.sort)
+    |> Seq.map (fun (age, data) ->
+        data
+        |> Seq.map (fun (t, avg) -> snd t, avg)
+        |> Seq.sort)
     |> Chart.Line
 
 let survivedByClass =
     data.Rows
-    |> Seq.groupBy (fun p ->
-    p.Pclass,p.Survived)
-    |> Seq.map (fun (group,data) ->
-        let (clas,survived) = group
-        string clas,(if survived then "Survived" else "Died"),data |> Seq.length)    
+    |> Seq.groupBy (fun p -> p.Pclass, p.Survived)
+    |> Seq.map (fun (group, data) ->
+        let (clas, survived) = group
+        string clas,
+        (if survived then "Survived" else "Died"), data |> Seq.length)
     |> Chart.Sankey
 
 //FIX: HTML error
 let age =
     data.Rows
-    |> Seq.map (fun p -> p.Name,p.Age)
+    |> Seq.map (fun p -> p.Name, p.Age)
     |> Chart.Histogram
     |> Chart.WithLabel "Age"
 
 let ageToFare =
     data.Rows
-    |> Seq.map (fun p -> p.Fare,p.Age)
+    |> Seq.map (fun p -> p.Fare, p.Age)
     |> Chart.Scatter
