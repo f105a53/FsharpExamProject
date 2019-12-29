@@ -32,25 +32,18 @@ let missileSuccessRate (chartHeight: int) (chartWidth: int) =
 
     data
     |> Chart.Sankey
-    |> Chart.WithOptions(Options(title = "North Korea Missile Test Success Rates"))
+    |> Chart.WithLabels [ "Missile"; "Result"; "Count" ]
     |> Chart.WithWidth chartWidth
     |> Chart.WithHeight chartHeight
     |> Chart.Show
 
-let showCommodityValueAnnotationChart (commodityList: string []) (chartHeight: int) =
-    let commodities = CommodityPrices.GetSamples()
-
-    let getCommodityIndex (arr: (string * CommodityPrices.Root []) []) (element: string) =
-        arr
-        |> Array.map (fun (s, r) -> s)
-        |> try
-            Array.findIndex ((=) element)
-           with :? KeyNotFoundException -> (fun ex -> -1)
+let showCommodityValueLineChart (commodityList: string []) (chartHeight: int) =
+    let commodities = CommodityPrices.GetSamples() |> Array.groupBy (fun c -> c.Fields.Commodity)
 
     let commodityValueData (commodity: string) =
         commodities
-        |> Array.groupBy (fun c -> c.Fields.Commodity)
-        |> Array.item (getCommodityIndex (commodities |> Array.groupBy (fun c -> c.Fields.Commodity)) commodity)
+        |> Array.where (fst >> (=) commodity)
+        |> Array.exactlyOne
         |> snd
         |> Array.map (fun r -> (r.Fields.Date, r.Fields.PriceIndex))
         |> Array.sortDescending
@@ -68,8 +61,7 @@ let showTitanicAmountChart chartWidth chartHeight =
     let classAmountData =
         passengers
         |> Array.countBy (fun p -> p.Fields.Pclass)
-        |> List.ofArray
-        |> List.map (fun (x, y) -> x, y :> value)
+        |> Array.map (fun (x, y) -> x, y :> value)
 
     [ classAmountData ]
     |> Chart.Column
@@ -90,8 +82,7 @@ let showTitanicAgeChart chartWidth chartHeight =
             ps
             |> Array.choose (fun p -> p.Fields.Age)
             |> summaryFunc)
-        |> List.ofArray
-        |> List.map (fun (x, y) -> x, y :> value)
+        |> Array.map (fun (x, y) -> x, y :> value)
 
     [ classAgeSummaryData Array.min
       classAgeSummaryData Array.max
