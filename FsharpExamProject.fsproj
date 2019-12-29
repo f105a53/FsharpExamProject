@@ -8,7 +8,7 @@
     <Compile Include="CSV.fs" />
     <Compile Include="XML.fs" />
     <Compile Include="Program.fs" />
-    <None Include="data/**" />
+    <None Include="data/**" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Deedle" Version="2.1.0" />
