@@ -1,12 +1,12 @@
 ﻿// Learn more about F# at http://fsharp.org
 
 open System
-open JsonModule
-open FSharp.Data
-open XPlot.GoogleCharts
-open Deedle
+open Json
 
 [<EntryPoint>]
 let main argv =
-    showChart
+    // showTitanicAmountChart 700 700
+    // showTitanicAgeChart 700 700
+    birthDeathEmperors 950
+    // showCommodityValueAnnotationChart (["Copper"; "Lead"; "Aluminum"; "Nickel"; "Tin"] |> Array.ofList) 900
     0 // return an integer exit code

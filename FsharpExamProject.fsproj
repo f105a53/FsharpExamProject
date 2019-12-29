@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="JsonModule.fs" />
+    <Compile Include="Json.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
