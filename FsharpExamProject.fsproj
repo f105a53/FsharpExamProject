@@ -5,10 +5,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Json.fs" />
-    <Compile Include="CSV.fs"/>
+    <Compile Include="CSV.fs" />
+    <Compile Include="XML.fs" />
     <Compile Include="Program.fs" />
-    <None Include="data/**" CopyToOutputDirectory="PreserveNewest" />
-    
+    <None Include="data/**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Deedle" Version="2.1.0" />
