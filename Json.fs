@@ -9,21 +9,33 @@ type TitanicPassengers = JsonProvider<"./files/titanic-passengers.json">
 
 type CommodityPrices = JsonProvider<"./files/commodity-prices.json"> // http://pubdocs.worldbank.org/en/678281575404408706/CMO-Pink-Sheet-December-2019.pdf
 
-// type RomanEmperors = JsonProvider<"./files/roman-emperors.json"> // https://fslab.org/XPlot/chart/google-timeline-chart.html
+type MissileTests = JsonProvider<"./files/north-korea-missile-test.json">
 
-// let birthDeathEmperors (chartHeight: int) =
-//     let emperors = RomanEmperors.GetSamples()
 
-//     let data =
-//         emperors
-//         |> Array.map (fun r ->
-//             (r.Fields.Name, r.Fields.ReignStart |> DateTime.Parse, r.Fields.ReignEnd |> DateTime.Parse))
+let missileSuccessRate (chartHeight: int) (chartWidth: int) =
+    let missiles = MissileTests.GetSamples()
 
-//     data
-//     |> Chart.Timeline
-//     |> Chart.WithLabels [ "Start"; "End" ]
-//     |> Chart.WithHeight chartHeight
-//     |> Chart.Show
+    let checkUnknown (t: string * string * int) =
+        match t with
+        | (n, s, i) when (n = "Unknown" && s = "Unknown") -> ("UNKNOWN_NAME", "UNKNOWN_SUCCESS_RATE", i)
+        | (n, s, i) when n = "Unknown" -> ("UNKNOWN_NAME", s, i)
+        | (n, s, i) when s = "Unknown" -> (n, "UNKNOWN_SUCCESS", i)
+        | _ -> t
+
+    let data =
+        missiles
+        |> Array.map (fun r -> (r.Fields.MissileName, r.Fields.Success))
+        |> Array.sort
+        |> Array.groupBy (fun (n, s) -> n, s)
+        |> Array.map (fun (summary, tests) -> (summary |> fst, summary |> snd, Array.length tests) |> checkUnknown)
+        |> Array.sort
+
+    data
+    |> Chart.Sankey
+    |> Chart.WithOptions(Options(title = "North Korea Missile Test Success Rates"))
+    |> Chart.WithWidth chartWidth
+    |> Chart.WithHeight chartHeight
+    |> Chart.Show
 
 let showCommodityValueAnnotationChart (commodityList: string []) (chartHeight: int) =
     let commodities = CommodityPrices.GetSamples()
@@ -46,7 +58,6 @@ let showCommodityValueAnnotationChart (commodityList: string []) (chartHeight: i
     commodityList
     |> Array.map (commodityValueData)
     |> Chart.Line
-    |> Chart.WithOptions(Options(title = "Commodity Prices"))
     |> Chart.WithLabels commodityList
     |> Chart.WithHeight chartHeight
     |> Chart.Show
