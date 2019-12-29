@@ -17,6 +17,6 @@ let missingByYearColumnsChart (chartHeight: int) =
     data
     |> Chart.Column
     |> Chart.WithLabels [ "Missing Amount" ]
-    |> Chart.WithOptions(Options(title = "Missing Persons per Year", hAxis = Axis(title = "Year")))
+    |> Chart.WithOptions(Options(title = "Missing Persons per Year in the US", hAxis = Axis(title = "Year")))
     |> Chart.WithHeight chartHeight
     |> Chart.Show
