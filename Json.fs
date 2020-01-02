@@ -25,7 +25,6 @@ let missileSuccessRate (chartHeight: int) (chartWidth: int) =
     let data =
         missiles
         |> Array.map (fun r -> (r.Fields.MissileName, r.Fields.Success))
-        |> Array.sort
         |> Array.groupBy (fun (n, s) -> n, s)
         |> Array.map (fun (summary, tests) -> (summary |> fst, summary |> snd, Array.length tests) |> checkUnknown)
         |> Array.sort
