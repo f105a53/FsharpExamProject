@@ -43,10 +43,10 @@ let survivedByClass =
         (if survived then "Survived" else "Died"), data |> Seq.length)
     |> Chart.Sankey
 
-//FIX: HTML error
+    
 let age =
     data.Rows
-    |> Seq.map (fun p -> p.Name, p.Age)
+    |> Seq.map (fun p -> p.Name.Replace("\"",""), p.Age)
     |> Chart.Histogram
     |> Chart.WithLabel "Age"
 
