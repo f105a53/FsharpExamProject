@@ -54,3 +54,10 @@ let ageToFare =
     data.Rows
     |> Seq.map (fun p -> p.Fare, p.Age)
     |> Chart.Scatter
+
+let passangersInClasses =
+    data.Rows
+    |> Seq.countBy (fun p -> p.Pclass)
+    |> Seq.sort
+    |> Chart.Table
+    |> Chart.WithLabels ["Class";"Passanger Count"]
