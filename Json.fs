@@ -19,13 +19,12 @@ let missileSuccessRate (chartHeight: int) (chartWidth: int) =
         match t with
         | (n, s, i) when (n = "Unknown" && s = "Unknown") -> ("UNKNOWN_NAME", "UNKNOWN_SUCCESS_RATE", i)
         | (n, s, i) when n = "Unknown" -> ("UNKNOWN_NAME", s, i)
-        | (n, s, i) when s = "Unknown" -> (n, "UNKNOWN_SUCCESS", i)
+        | (n, s, i) when s = "Unknown" -> (n, "UNKNOWN_SUCCESS_RATE", i)
         | _ -> t
 
     let data =
         missiles
         |> Array.map (fun r -> (r.Fields.MissileName, r.Fields.Success))
-        |> Array.sort
         |> Array.groupBy (fun (n, s) -> n, s)
         |> Array.map (fun (summary, tests) -> (summary |> fst, summary |> snd, Array.length tests) |> checkUnknown)
         |> Array.sort
@@ -71,8 +70,8 @@ let showTitanicAmountChart chartWidth chartHeight =
     |> Chart.WithHeight chartHeight
     |> Chart.Show
 
-let showTitanicAgeChart chartWidth chartHeight =
-    let passengers = TitanicPassengers.GetSamples()
+let showTitanicAgeChart (chartWidth: int) (chartHeight: int) =
+    let passengers = TitanicPassengers.Load("./data/json/titanic-passengers.json")
 
     let classAgeSummaryData summaryFunc =
         passengers
@@ -81,8 +80,7 @@ let showTitanicAgeChart chartWidth chartHeight =
             s,
             ps
             |> Array.choose (fun p -> p.Fields.Age)
-            |> summaryFunc)
-        |> Array.map (fun (x, y) -> x, y :> value)
+            |> summaryFunc :> value)
 
     [ classAgeSummaryData Array.min
       classAgeSummaryData Array.max
