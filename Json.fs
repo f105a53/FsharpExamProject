@@ -71,8 +71,8 @@ let showTitanicAmountChart chartWidth chartHeight =
     |> Chart.WithHeight chartHeight
     |> Chart.Show
 
-let showTitanicAgeChart chartWidth chartHeight =
-    let passengers = TitanicPassengers.GetSamples()
+let showTitanicAgeChart (chartWidth: int) (chartHeight: int) =
+    let passengers = TitanicPassengers.Load("./data/json/titanic-passengers.json")
 
     let classAgeSummaryData summaryFunc =
         passengers
@@ -81,8 +81,7 @@ let showTitanicAgeChart chartWidth chartHeight =
             s,
             ps
             |> Array.choose (fun p -> p.Fields.Age)
-            |> summaryFunc)
-        |> Array.map (fun (x, y) -> x, y :> value)
+            |> summaryFunc :> value)
 
     [ classAgeSummaryData Array.min
       classAgeSummaryData Array.max
