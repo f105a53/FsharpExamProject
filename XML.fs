@@ -37,5 +37,4 @@ let airQualityByCountry =
 
     data
     |> Chart.Geo
-    |> Chart.Show
  
