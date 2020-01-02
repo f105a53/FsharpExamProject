@@ -17,6 +17,6 @@ let main argv =
     // |> Chart.Show
 
     // XML.missingByYearColumnsChart 1000
-    XML.airQualityByCountry
+    CSV.passangersInClasses |> Chart.Show
 
     0 // return an integer exit code
