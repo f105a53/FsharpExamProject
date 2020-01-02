@@ -19,7 +19,7 @@ let missileSuccessRate (chartHeight: int) (chartWidth: int) =
         match t with
         | (n, s, i) when (n = "Unknown" && s = "Unknown") -> ("UNKNOWN_NAME", "UNKNOWN_SUCCESS_RATE", i)
         | (n, s, i) when n = "Unknown" -> ("UNKNOWN_NAME", s, i)
-        | (n, s, i) when s = "Unknown" -> (n, "UNKNOWN_SUCCESS", i)
+        | (n, s, i) when s = "Unknown" -> (n, "UNKNOWN_SUCCESS_RATE", i)
         | _ -> t
 
     let data =
