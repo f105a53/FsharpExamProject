@@ -1,7 +1,7 @@
 ﻿// Learn more about F# at http://fsharp.org
 
 open System
-open XPlot.GoogleCharts
+//open XPlot.GoogleCharts
 
 [<EntryPoint>]
 let main argv =
@@ -11,7 +11,7 @@ let main argv =
     // Json.showTitanicAgeChart 700 700
     // Json.missileSuccessRate 900 900
     // Json.showCommodityValueLineChart (["Copper"; "Lead"; "Aluminum"; "Nickel"; "Tin"] |> Array.ofList) 900
-    Json.showCommodityValueLineChartPlotly (["Copper"; "Lead"; "Aluminum"; "Nickel"; "Tin"] |> Array.ofList) 900
+    Json.showCommodityValueLineChartPlotly (["Copper"; "Lead"; "Aluminum"; "Nickel"; "Tin"] |> Array.ofList)
 
     // // CSV.ageToFare
     // // |> Chart.WithHeight 1000    

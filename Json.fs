@@ -105,7 +105,8 @@ let showCommodityValueLineChartPlotly (commodityList: string []) =
 
     commodityList
     |> Array.map
-        (commodityValueData >> (fun arr -> Scatter(x = Array.map fst arr, y = Array.map snd arr, mode = "markers")))
+        (commodityValueData
+         >> (fun arr -> Scatter(x = Array.map fst arr, y = Array.map snd arr, line = Line(shape = "hv")))) // Shapes to try: hv, vh, hvh, vhv, >spline<, linear
     |> Chart.Plot
     |> Chart.WithLabels commodityList
     |> Chart.Show
