@@ -14,5 +14,6 @@
     <PackageReference Include="Deedle" Version="2.1.0" />
     <PackageReference Include="Fsharp.Data" Version="3.3.2" />
     <PackageReference Include="XPlot.GoogleCharts.Deedle" Version="3.0.1" />
+    <PackageReference Include="XPlot.Plotly" Version="3.0.1" />
   </ItemGroup>
 </Project>
